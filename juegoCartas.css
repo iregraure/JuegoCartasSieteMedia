@@ -1,0 +1,80 @@
+#all {
+    width: 80%;
+    margin: 1% 10%;
+}
+
+#jugador, #banca {
+    float: left;
+    width: 50%;
+    height: 800px;
+}
+
+#cabeceraJ, #puntosB {
+    float: top;
+    margin: auto;
+    height: 6%;
+    border: solid black 1px;
+}
+
+#puntosJ {
+    float: left;
+    height: 100%;
+    width: 35%;
+    margin-left: 15px;
+}
+
+#boton {
+    float: left;
+    height: 100%;
+    width: 35%;
+    margin: 0 15px;
+}
+
+#planto {
+    display: block;
+    margin: 5% auto;
+}
+
+#cartasJugador, #cartasBanca {
+    border: solid 1px black;
+    height: 94%;
+    float: bottom;
+}
+
+#cartasJ, #cartasB {
+    height: 70%;
+}
+
+#mazoJ, #mazoB {
+    width: 50%;
+    float: left;
+    height: 100%;
+}
+
+#cartaJ, #cartaB {
+    width: 50%;
+    float: left;
+    height: 100%;
+}
+
+#miniaturasJ, #miniaturasB {
+    height: 30%;
+}
+
+#puntosB {
+    padding-left: 15px;
+}
+
+#footer {
+    float: bottom;
+    clear: both;
+}
+
+#footer p {
+    text-align: center;
+    padding-top: 15px;
+}
+
+#reiniciar {
+    margin: 0 10px 5px;
+}
