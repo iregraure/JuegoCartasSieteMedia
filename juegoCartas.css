@@ -78,3 +78,11 @@
 #reiniciar {
     margin: 0 10px 5px;
 }
+
+img {
+    padding: 20px;
+}
+
+#cartaJug, #cartaBan {
+    padding: 20%;
+}
