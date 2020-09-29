@@ -19,16 +19,8 @@ mazoJ.addEventListener('click', (e) => {
         sacaCarta('jugador');
         // Comprobamos si el jugador se ha pasado de 7.5, si se ha pasado mostramos que ha ganado la banca
         if (puntosJugador > 7.5) {
-            // Creamos el nuevo elemento p
-            let nuevoGanador = document.createElement("p");
-            // Le añadimos el texto
-            nuevoGanador.appendChild(document.createTextNode("Ganador: Banca"));
-            // Le añadimos el id
-            nuevoGanador.setAttribute('id', "ganador");
-            // Obtenemos el nodo antiguo
-            let viejoGanador = document.getElementById("ganador");
-            // Cambiamos el nodo antiguo por el nuevo
-            viejoGanador.parentNode.replaceChild(nuevoGanador, viejoGanador);
+            // Llamamos a la función que muestra el ganador
+            muestraGanador();
         }
     }
 })
@@ -39,8 +31,8 @@ plantar.addEventListener('click', (e) => {
     if (puntosJugador <= 7.5){
         // Se va a repetir todo mientras que los puntos de la banca sean menores que los del jugador y menores de 7.5
         while (puntosBanca < puntosJugador && puntosBanca < 7.5) {
-            // // Llamamos a la función que va a sacar una nueva carta
-            sacaCarta('banca');
+            // Llamamos a la función que va a sacar una nueva carta
+            sacaCarta("banca");
         }
         // Cuando sale del bucle llamamos a la función que muestra el ganador
         muestraGanador();
@@ -56,35 +48,35 @@ reiniciar.addEventListener('click', (e) => {
 // Función que va a sacar una carta y la va a mostrar
 const sacaCarta = (jugador) => {
     let usada = true;
-        while(usada){
-            // Obtenemos la posición del palo y su nombre de forma aleatoria
-            let posPalo = Math.floor(Math.random()*4);
-            let palo = arrayPalos[posPalo];
-            // Obtenemos el número de la carta
-            let numCarta = Math.floor(Math.random()*(11-1))+1;
-            // Se obtiene la ruta de la carta
-            let rutaCarta = `imagenes/${numCarta}${palo}.jpg`;
-            // Una vez tenemos la ruta de la carta, comprobamos si ya se ha usado
-            if(!cartasUsadas.includes(rutaCarta)){
-                // Llamamos a la función que muestra la carta 
-                muestraCarta(jugador, rutaCarta);
-                // Añadimos la ruta de la carta mostrada al array de cartas utilizadas
-                cartasUsadas.push(rutaCarta);
-                // Llamamos a la función para mostrar la miniatura
-                muestraMiniatura(jugador, rutaCarta);
-                // Dependiendo del valor de jugador llamamos a la función que calcula el número de puntos
-                if (jugador == 'jugador'){
-                    puntosJugador = calculaPuntos(puntosJugador, numCarta);
-                }
-                else {
-                    puntosBanca = calculaPuntos(puntosBanca, numCarta);
-                }
-                // Llamamos a la función que muestra el número de puntos
-                muestraPuntos(jugador);
-                // Cambiamos el valor de usada a false para que salga del while
-                usada = false;
-            }        
-        }
+    while(usada){
+        // Obtenemos la posición del palo y su nombre de forma aleatoria
+        let posPalo = Math.floor(Math.random()*4);
+        let palo = arrayPalos[posPalo];
+        // Obtenemos el número de la carta
+        let numCarta = Math.floor(Math.random()*(11-1))+1;
+        // Se obtiene la ruta de la carta
+        let rutaCarta = `imagenes/${numCarta}${palo}.jpg`;
+        // Una vez tenemos la ruta de la carta, comprobamos si ya se ha usado
+        if(!cartasUsadas.includes(rutaCarta)){
+            // Llamamos a la función que muestra la carta 
+            muestraCarta(jugador, rutaCarta);
+            // Añadimos la ruta de la carta mostrada al array de cartas utilizadas
+            cartasUsadas.push(rutaCarta);
+            // Llamamos a la función para mostrar la miniatura
+            muestraMiniatura(jugador, rutaCarta);
+            // Dependiendo del valor de jugador llamamos a la función que calcula el número de puntos
+            if (jugador == 'jugador'){
+                puntosJugador = calculaPuntos(puntosJugador, numCarta);
+            }
+            else {
+                puntosBanca = calculaPuntos(puntosBanca, numCarta);
+            }
+            // Llamamos a la función que muestra el número de puntos
+            muestraPuntos(jugador);
+            // Cambiamos el valor de usada a false para que salga del while
+            usada = false;
+        }        
+    }
 }
 
 // Función que va a reemplazar la imagen de la carta anterior por la nueva carta
@@ -174,6 +166,7 @@ const muestraMiniatura = (jugador, rutaCarta) => {
 }
 
 const muestraGanador = () => {
+    console.log("entra en muestraGanador")
     // Creamos el nuevo elemento p
     let nuevoGanador = document.createElement("p");
     // Le añadimos el id
@@ -190,4 +183,28 @@ const muestraGanador = () => {
     let viejoGanador = document.getElementById("ganador");
     // Cambiamos el nodo antiguo por el nuevo
     viejoGanador.parentNode.replaceChild(nuevoGanador, viejoGanador);
+    // Después de mostrar el nombre del ganador llamamos a la función que va a mostrar la medalla
+    muestraMedalla();
+}
+
+const muestraMedalla = () => {
+    let miniaturas;
+    console.log("entra en muestraMedalla")
+    // Si gana el jugador
+    if (puntosBanca > 7.5) {
+        // Recuperamos las miniaturas del jugador
+        miniaturas = document.getElementById("miniaturasJ");
+    }
+    // Si no, recuperamos las miniaturas de la banca
+    else {
+        miniaturas = document.getElementById("miniaturasB");
+    }
+    // Creamos un nodo imagen para mostrar la medalla
+    let imagen = document.createElement("img");
+    // Le añadimos la ruta de la imagen
+    imagen.setAttribute('src', 'imagenes/medalla.jpg');
+    // Le añadimos un id
+    imagen.setAttribute('id', "medalla");
+    // Añadimos la imagen a las miniaturas
+    miniaturas.appendChild(imagen);
 }
